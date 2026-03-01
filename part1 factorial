@@ -1,0 +1,58 @@
+public class factorial{
+    public static long factIterative(int n) {
+        long fact = 1;
+        for (int i = 1; i <= n; i++) {
+            fact *= i;
+        }
+        return fact;
+    }
+
+  
+    public static long factRecursive(int n) {
+        if (n == 0 || n == 1)
+            return 1;
+        return n * factRecursive(n - 1);
+    }
+
+    public static void main(String[] args) {
+
+        int n = 10;   
+        int runs = 5;
+
+        long totalIterativeTime = 0;
+        long totalRecursiveTime = 0;
+
+        System.out.println("Input Number: " + n);
+        for (int i = 1; i <= runs; i++) {
+            long start = System.nanoTime();
+            factIterative(n);
+            long end = System.nanoTime();
+
+            long time = end - start;
+            totalIterativeTime += time;
+
+            System.out.println("Run " + i + " Time: " + time + " ns");
+        }
+
+
+            for (int i = 1; i <= runs; i++) {
+            long start = System.nanoTime();
+            factRecursive(n);
+            long end = System.nanoTime();
+
+            long time = end - start;
+            totalRecursiveTime += time;
+
+            System.out.println("Run " + i + " Time: " + time + " ns");
+        }
+
+        double avgIterative = totalIterativeTime / (double) runs;
+        double avgRecursive = totalRecursiveTime / (double) runs;
+
+        System.out.println("\n===== Average Execution Time =====");
+        System.out.println("Iterative Average Time: " + avgIterative + " ns");
+        System.out.println("Recursive Average Time: " + avgRecursive + " ns");
+
+      
+    }
+}
